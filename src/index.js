@@ -50,8 +50,8 @@ Fli.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, 
 
 Fli.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("Fli onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    var speechOutput = "Welcome to the Alexa Skills Kit, you can say hello";
-    var repromptText = "You can say hello";
+    var repromptText = "To add an event, say add event followed by the event type.";
+    var speechOutput = "Welcome to Fly!" + repromptText;
     response.ask(speechOutput, repromptText);
 };
 
@@ -64,10 +64,10 @@ Fli.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, sess
 Fli.prototype.intentHandlers = {
     // register custom intent handlers
     "FliIntent": function (intent, session, response) {
-        response.tellWithCard("Hello World!", "Greeter", "Hello World!");
+        response.tell("It seems you want to add an event");
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("You can say hello to me!", "You can say hello to me!");
+        response.ask("There's no help for you.");
     }
 };
 

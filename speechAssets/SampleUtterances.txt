@@ -1,7 +1,1 @@
-FliIntent say hello
-FliIntent say hello world
-FliIntent hello
-FliIntent say hi
-FliIntent say hi world
-FliIntent hi
-FliIntent how are you
+FliIntent add event
