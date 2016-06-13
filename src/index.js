@@ -63,7 +63,7 @@ Fli.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, sess
 
 Fli.prototype.intentHandlers = {
     // register custom intent handlers
-    "Fli": function (intent, session, response) {
+    "FliIntent": function (intent, session, response) {
         response.tellWithCard("Hello World!", "Greeter", "Hello World!");
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
