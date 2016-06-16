@@ -64,10 +64,42 @@ Fli.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, sess
 Fli.prototype.intentHandlers = {
     // register custom intent handlers
     "FliIntent": function (intent, session, response) {
-        response.tell("It seems you want to add an event");
+        response.tell("Attempting to add your event...");
+
+        var http = require('http');
+        var body = '';
+        var event = {
+          eventType: "some blah type",
+          occurredAt: "2015-01-01 10:10:00",
+          story: "1234"
+        };
+        var jsonObject = JSON.stringify(event);
+
+        // the post options
+        var options = {
+          host: 'http://fli-change.herokuapp.com',
+          path: '/events',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        };
+
+        var postRequest = https.request(options, function(res) {
+          console.log("statusCode: ", res.statusCode);
+          res.on('data', function (chunk) {
+            body += chunk;
+          });
+          context.succeed('finished http post request!');
+        });
+
+        reqPost.write(jsonObject);
+        reqPost.end();
+
+        response.tell("Event added successfully!");
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("There's no help for you.");
+      response.ask("There's no help for you.");
     }
 };
 
