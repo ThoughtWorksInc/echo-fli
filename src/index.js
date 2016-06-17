@@ -87,6 +87,11 @@ Fli.prototype.intentHandlers = {
         var req = http.request(options, function(res) {
           console.log("STATUS: " + res.statusCode);
           console.log("HEADERS: " + JSON.stringify(res.headers));
+          if (res.statusCode === 409) {
+            response.tell("Sorry, your event already exists.");
+          } else {
+            response.tell("Event added successfully");
+          }
           res.setEncoding('utf8');
           res.on('data', function(chunk) {
               console.log("BODY: " + chunk);
