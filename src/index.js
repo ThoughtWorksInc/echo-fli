@@ -52,7 +52,7 @@ Fli.prototype.eventHandlers.onLaunch = function (launchRequest, session, respons
     console.log("Fli onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
     var commonText = "To add an event, say 'add event' followed by the event type.";
     var repromptText = "Remember, " + commonText;
-    var promptText = "Welcome to Fli. " + commonText;
+    var promptText = "Welcome to Fly. " + commonText;
     response.ask(promptText, repromptText);
 };
 
