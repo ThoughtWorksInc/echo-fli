@@ -50,9 +50,10 @@ Fli.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, 
 
 Fli.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("Fli onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    var repromptText = "To add an event, say add event followed by the event type.";
-    var speechOutput = "Welcome to Fly!" + repromptText;
-    response.ask(speechOutput, repromptText);
+    var commonText = "To add an event, say 'add event' followed by the event type.";
+    var repromptText = "Remember, " + commonText;
+    var promptText = "Welcome to Fli. " + commonText;
+    response.ask(promptText, repromptText);
 };
 
 Fli.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
@@ -64,42 +65,47 @@ Fli.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, sess
 Fli.prototype.intentHandlers = {
     // register custom intent handlers
     "FliIntent": function (intent, session, response) {
-        response.tell("Attempting to add your event...");
-
         var http = require('http');
-        var body = '';
-        var event = {
-          eventType: "some blah type",
-          occurredAt: "2015-01-01 10:10:00",
-          story: "1234"
-        };
-        var jsonObject = JSON.stringify(event);
 
-        // the post options
+        var postData = JSON.stringify({
+            eventType: "some blah type",
+            occurredAt: "2015-01-01 10:10:00",
+            story: "123456789"
+        });
+
         var options = {
-          host: 'http://fli-change.herokuapp.com',
-          path: '/events',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+            hostname: 'fli-change.herokuapp.com',
+            port: 80,
+            path: '/events',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Content-Length': postData.length
           }
         };
 
-        var postRequest = https.request(options, function(res) {
-          console.log("statusCode: ", res.statusCode);
-          res.on('data', function (chunk) {
-            body += chunk;
+        var req = http.request(options, function(res) {
+          console.log("STATUS: " + res.statusCode);
+          console.log("HEADERS: " + JSON.stringify(res.headers));
+          res.setEncoding('utf8');
+          res.on('data', function(chunk) {
+              console.log("BODY: " + chunk);
           });
-          context.succeed('finished http post request!');
+          res.on('end', function() {
+              console.log('No more data in response.');
+          });
         });
 
-        reqPost.write(jsonObject);
-        reqPost.end();
+        req.on('error', function(e) {
+            console.log("problem with request: " + e.message);
+            response.tell("Sorry, I was unable to add your event.");
+        });
 
-        response.tell("Event added successfully!");
+        req.write(postData);
+        req.end();
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
-      response.ask("There's no help for you.");
+        response.ask("There's no help for you.");
     }
 };
 
