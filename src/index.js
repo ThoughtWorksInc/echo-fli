@@ -66,10 +66,11 @@ Fli.prototype.intentHandlers = {
     // register custom intent handlers
     "FliIntent": function (intent, session, response) {
         var http = require('http');
+        var moment = require('moment');
 
         var postData = JSON.stringify({
             eventType: "some blah type",
-            occurredAt: "2015-01-01 10:10:00",
+            occurredAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             story: "123456789"
         });
 
