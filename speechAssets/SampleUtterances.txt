@@ -1,1 +1,1 @@
-FliIntent add event
+FliIntent add event {Event}

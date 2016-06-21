@@ -1,10 +1,17 @@
 {
   "intents": [
     {
-      "intent": "FliIntent"
+      "intent": "FliIntent",
+      "slots": [
+        {
+          "name": "Event",
+          "type": "LIST_OF_EVENTS"
+        }
+      ]
     },
     {
       "intent": "AMAZON.HelpIntent"
     }
   ]
 }
+"slots": [
