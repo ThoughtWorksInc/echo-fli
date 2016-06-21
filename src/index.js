@@ -71,7 +71,7 @@ Fli.prototype.intentHandlers = {
         var postData = JSON.stringify({
             eventType: intent.slots.Event.value,
             occurredAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-            story: "123456789"
+            story: intent.slots.Number.value
         });
 
         var options = {

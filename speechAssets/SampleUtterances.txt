@@ -1,4 +1,1 @@
 FliIntent add event {Event} for story {Number}
-FliIntent add event {Event} for story {Number} {Number}
-FliIntent add event {Event} for story {Number} {Number} {Number}
-FliIntent add event {Event} for story {Number} {Number} {Number} {Number}
