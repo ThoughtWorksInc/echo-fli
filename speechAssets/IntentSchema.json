@@ -6,6 +6,10 @@
         {
           "name": "Event",
           "type": "LIST_OF_EVENTS"
+        },
+        {
+          "name": "Number",
+          "type": "Amazon.NUMBER"
         }
       ]
     },
