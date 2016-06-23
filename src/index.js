@@ -23,7 +23,7 @@ Fli.prototype.intentHandlers = {
 
         var postData = JSON.stringify({
             eventType: intent.slots.Event.value,
-            occurredAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+            occurredAt: moment.utc().format('YYYY-MM-DD HH:mm:ss'),
             story: intent.slots.Number.value
         });
 
