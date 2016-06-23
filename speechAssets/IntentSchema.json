@@ -9,7 +9,7 @@
         },
         {
           "name": "Number",
-          "type": "Amazon.NUMBER"
+          "type": "AMAZON.NUMBER"
         }
       ]
     },
@@ -18,4 +18,3 @@
     }
   ]
 }
-"slots": [
