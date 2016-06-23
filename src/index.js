@@ -74,7 +74,8 @@ Fli.prototype.intentHandlers = {
         req.end();
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("There's no help for you.");
+        response.ask("Event types are words such as start and end, and story IDs are numbers." +
+                     "A sample input is as follows: 'add event start for story 19'.");
     }
 };
 
