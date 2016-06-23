@@ -9,7 +9,6 @@ Fli.prototype = Object.create(AlexaSkill.prototype);
 Fli.prototype.constructor = Fli;
 
 Fli.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-    console.log("Fli onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
     var commonText = "To add an event, say 'add event event type for story story ID.";
     var repromptText = "Remember, " + commonText;
     var promptText = "Welcome to Fly. " + commonText;
@@ -44,7 +43,6 @@ Fli.prototype.intentHandlers = {
           } else {
             response.tell("Event added successfully");
           }
-          res.setEncoding('utf8');
         });
 
         req.on('error', function(e) {
