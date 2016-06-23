@@ -10,28 +10,28 @@ AlexaSkill.speechOutputType = {
 }
 
 AlexaSkill.prototype.requestHandlers = {
-    LaunchRequest: function (event, context, response) {
+    LaunchRequest: function(event, context, response) {
         this.eventHandlers.onLaunch.call(this, event.request, event.session, response);
     },
 
-    IntentRequest: function (event, context, response) {
+    IntentRequest: function(event, context, response) {
         this.eventHandlers.onIntent.call(this, event.request, event.session, response);
     },
 
-    SessionEndedRequest: function (event, context) {
+    SessionEndedRequest: function(event, context) {
         this.eventHandlers.onSessionEnded(event.request, event.session);
         context.succeed();
     }
 };
 
 AlexaSkill.prototype.eventHandlers = {
-    onSessionStarted: function (sessionStartedRequest, session) {
+    onSessionStarted: (sessionStartedRequest, session) => {
     },
-    onLaunch: function (launchRequest, session, response) {
+    onLaunch: (launchRequest, session, response) => {
         throw "onLaunch should be overriden by subclass";
     },
-    onIntent: function (intentRequest, session, response) {
-        var intent = intentRequest.intent,
+    onIntent: function(intentRequest, session, response) {
+        const intent = intentRequest.intent,
             intentName = intentRequest.intent.name,
             intentHandler = this.intentHandlers[intentName];
         if (intentHandler) {
@@ -46,7 +46,7 @@ AlexaSkill.prototype.eventHandlers = {
 
 AlexaSkill.prototype.intentHandlers = {};
 
-AlexaSkill.prototype.execute = function (event, context) {
+AlexaSkill.prototype.execute = function(event, context) {
     try {
         if (this._appId && event.session.application.applicationId !== this._appId) {
             throw "Invalid applicationId";
@@ -60,14 +60,14 @@ AlexaSkill.prototype.execute = function (event, context) {
             this.eventHandlers.onSessionStarted(event.request, event.session);
         }
 
-        var requestHandler = this.requestHandlers[event.request.type];
+        const requestHandler = this.requestHandlers[event.request.type];
         requestHandler.call(this, event, context, new Response(context, event.session));
     } catch (e) {
         context.fail(e);
     }
 };
 
-var Response = function (context, session) {
+const Response = function(context, session) {
     this._context = context;
     this._session = session;
 };
@@ -86,9 +86,9 @@ function createSpeechObject(optionsParam) {
     }
 }
 
-Response.prototype = (function () {
-    var buildSpeechletResponse = function (options) {
-        var alexaResponse = {
+Response.prototype = (() => {
+    const buildSpeechletResponse = (options) => {
+        const alexaResponse = {
             outputSpeech: createSpeechObject(options.output),
             shouldEndSession: options.shouldEndSession
         };
@@ -104,7 +104,7 @@ Response.prototype = (function () {
                 content: options.cardContent
             };
         }
-        var returnResult = {
+        const returnResult = {
                 version: '1.0',
                 response: alexaResponse
         };
@@ -115,14 +115,14 @@ Response.prototype = (function () {
     };
 
     return {
-        tell: function (speechOutput) {
+        tell: function(speechOutput) {
             this._context.succeed(buildSpeechletResponse({
                 session: this._session,
                 output: speechOutput,
                 shouldEndSession: true
             }));
         },
-        tellWithCard: function (speechOutput, cardTitle, cardContent) {
+        tellWithCard: function(speechOutput, cardTitle, cardContent)  {
             this._context.succeed(buildSpeechletResponse({
                 session: this._session,
                 output: speechOutput,
@@ -131,7 +131,7 @@ Response.prototype = (function () {
                 shouldEndSession: true
             }));
         },
-        ask: function (speechOutput, repromptSpeech) {
+        ask: function(speechOutput, repromptSpeech) {
             this._context.succeed(buildSpeechletResponse({
                 session: this._session,
                 output: speechOutput,
@@ -139,7 +139,7 @@ Response.prototype = (function () {
                 shouldEndSession: false
             }));
         },
-        askWithCard: function (speechOutput, repromptSpeech, cardTitle, cardContent) {
+        askWithCard: function(speechOutput, repromptSpeech, cardTitle, cardContent) {
             this._context.succeed(buildSpeechletResponse({
                 session: this._session,
                 output: speechOutput,
