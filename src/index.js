@@ -9,7 +9,7 @@ Fli.prototype = Object.create(AlexaSkill.prototype);
 Fli.prototype.constructor = Fli;
 
 Fli.prototype.eventHandlers.onLaunch = (launchRequest, session, response) => {
-    var repromptText = "Remember, to add an event, say 'add event event-type for story story ID.";
+    var repromptText = "Remember, to add an event, say 'add event, event-type, for story, story ID.";
     var promptText = "Let's fly!";
     response.ask(promptText, repromptText);
 };
@@ -61,4 +61,3 @@ exports.handler = function (event, context) {
     const fli = new Fli();
     fli.execute(event, context);
 };
-
