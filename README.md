@@ -34,4 +34,9 @@ Until we get CI set up, you can make edits to the contents of speechAssets and r
 
 Down the road, when linking Echo users to users in our system for the purpose of distinguishing between different teams that use our skill, this link might prove helpful: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/linking-an-alexa-user-with-a-user-in-your-system
 
-*last updated on June 24, 2016 by Matthew Sloane, with development steps*
+**TODO:**
+Currently Alexa will add events that are not included in our list of event types. This is because custom slot types act as a guide for user input, but do not exclude other terms. See here for a full explanation: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interaction-model-reference#h2_custom_syntax
+
+To fix this, we can verify the user input on our end to make sure it is one of the events in the list. See here for details: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/handling-requests-sent-by-alexa#Handling%20Possible%20Input%20Errors
+
+*last updated on July 18, 2016 by Samantha Stilson, with todo for user input verification*
