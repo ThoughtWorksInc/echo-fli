@@ -1,0 +1,23 @@
+{
+  "name": "echo-fli",
+  "version": "1.0.0",
+  "description": "Alexa Skill Lambda for FLI",
+  "dependencies": {
+    "moment": "2.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThoughtWorksInc/echo-fli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThoughtWorksInc/echo-fli/issues"
+  },
+  "homepage": "https://github.com/ThoughtWorksInc/echo-fli#readme"
+}

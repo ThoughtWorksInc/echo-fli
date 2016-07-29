@@ -1,10 +1,11 @@
 # Fli: AWS Lambda and Skill for Alexa
 ##### Steps for development
 **AWS Development:**  
-1. Register for an AWS developer account here: https://developer.amazon.com/appsandservices
+0. Register for an AWS developer account here: https://developer.amazon.com/appsandservices
  (account needs to be US East to support the free pricing tier)  
 
 **Lambda:**  
+1. npm install
 2. Go to the AWS console: https://console.aws.amazon.com/console/home?region=us-east-1  
 3. Click on the 'Lambda' option  
 4. Click 'Create a Lambda Function'  
