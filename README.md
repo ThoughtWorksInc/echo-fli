@@ -11,8 +11,8 @@
 4. Click 'Create a Lambda Function'  
 5. Skip blueprint selection  
 6. Give lambda function a name  
-7. Zip index.js and AlexaSkill.js with the node_modules from the repo. (note: file permissions must be world readable, advise compressing files separately)  
-8. Upload zip folder as lambda function code  
+7. ```npm run package``` (This will create a file called "dist.zip")  
+8. Upload "dist.zip" as lambda function code  
 9. Give Lambda function handler default role  
 10. Click 'next', review, and then 'create function'  
 11. Under the 'Event sources' tab, add 'Alexa Skills Kit'  

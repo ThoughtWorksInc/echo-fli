@@ -7,7 +7,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "rm -rf dist dist.zip && mkdir dist && cp functions/* dist && cp package.json dist && cd dist && npm install --production && zip -r ../dist.zip *"
   },
   "repository": {
     "type": "git",
