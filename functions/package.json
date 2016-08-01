@@ -1,0 +1,13 @@
+{
+  "name": "echo-fli",
+  "version": "0.1.0",
+  "description": "Alexa Skill Lambda for FLI",
+  "dependencies": {
+    "moment": "2.13.0"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThoughtWorksInc/echo-fli/issues"
+  },
+  "homepage": "https://github.com/ThoughtWorksInc/echo-fli#readme"
+}

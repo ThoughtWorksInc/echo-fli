@@ -1,14 +1,11 @@
 {
   "name": "echo-fli",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Alexa Skill Lambda for FLI",
-  "dependencies": {
-    "moment": "2.13.0"
-  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "rm -rf dist dist.zip && mkdir dist && cp functions/* dist && cp package.json dist && cd dist && npm install --production && zip -r ../dist.zip *"
+    "package": "rm -rf dist dist.zip && mkdir dist && cp functions/* dist && cd dist && npm install --production && zip -r ../dist.zip *"
   },
   "repository": {
     "type": "git",
