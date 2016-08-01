@@ -3,33 +3,43 @@
 **AWS Development:**  
 0. Register for an AWS developer account here: https://developer.amazon.com/appsandservices
  (account needs to be US East to support the free pricing tier)  
+1. Setup AWS credentials in your environment for deploying the lambda. Rather than using the root account user credentials,
+we recommend creating an IAM user with a role which allows it to deploy lambdas.
+..* tl;dr
+```
+export AWS_ACCESS_KEY_ID=<key>
+export AWS_SECRET_ACCESS_KEY=<secret>
+or
+export AWS_PROFILE=<profile>
+```
+..* Long Version: http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html
 
 **Lambda:**  
-1. npm install
-2. Go to the AWS console: https://console.aws.amazon.com/console/home?region=us-east-1  
-3. Click on the 'Lambda' option  
-4. Click 'Create a Lambda Function'  
-5. Skip blueprint selection  
-6. Give lambda function a name  
-7. ```npm run package``` (This will create a file called "dist.zip")  
-8. Upload "dist.zip" as lambda function code  
-9. Give Lambda function handler default role  
-10. Click 'next', review, and then 'create function'  
-11. Under the 'Event sources' tab, add 'Alexa Skills Kit'  
-12. Copy the ARN in the upper right-hand corner  
+2. npm install
+3. npm run package
+4. npm run deploy
+5. Go to the AWS console lambda service page: https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions?display=list
+6. Click on 'echo-fli' (this is the name of the function defined in the 'name' key of package.json
+7. Click 'Triggers' tab > '+ Add Trigger' > 'Alexa Skills Kit'. Notes:
+..* Unfortunately, there is currently no documented way to add the Alexa trigger programmatically
+..* This only needs to be done the first time the lambda is created. The trigger will remain in place for subsequently deployed lambdas.
+8. Copy the ARN in the upper right-hand corner  
 
 **Alexa Skill:**  
-13. Return here: https://developer.amazon.com/appsandservices  
-14. Go to 'Alexa' on the upper menu bar  
-15. Click 'Get Started' with the Alexa Skills Kit  
-16. Click "Add A New Skill'  
-17. Fill out required skill information where not defaulted for invocation and skill name  
-18. Fill out interaction model with information from the speechAssets subdirectory  
-19. Give the Lambda ARN as the Endpoint  
-20. Set Account Linking to 'no', subject to change when linking users in our system  
-21. Click 'next'  
-22. Under 'testing', you should see that the skill is enabled, and you can start using the voice simulator, service simulator, or the Echo itself. If it is not enabled, follow the instructions on the screen to enable it.  
-23. Pat yourself on the back! You're ready to rumble!  
+Notes:
+* Unfortunately, there is currently no documented way to create the Alexa skill programmatically
+* This only needs to be done once.
+9. Return here: https://developer.amazon.com/appsandservices  
+10. Go to 'Alexa' on the upper menu bar  
+11. Click 'Get Started' with the Alexa Skills Kit  
+12. Click "Add A New Skill'  
+13. Fill out required skill information where not defaulted for invocation and skill name  
+14. Fill out interaction model with information from the speechAssets subdirectory  
+15. Give the Lambda ARN as the Endpoint  
+16. Set Account Linking to 'no', subject to change when linking users in our system  
+17. Click 'next'  
+18. Under 'testing', you should see that the skill is enabled, and you can start using the voice simulator, service simulator, or the Echo itself. If it is not enabled, follow the instructions on the screen to enable it.  
+19. Pat yourself on the back! You're ready to rumble!  
 
 Until we get CI set up, you can make edits to the contents of speechAssets and revise the Alexa Skill, and make changes to the Lambda function and reupload the zip file. This will update your lambda/skill and allow you to invoke it on the Echo with your changes.
 

@@ -2,10 +2,13 @@
   "name": "echo-fli",
   "version": "0.1.0",
   "description": "Alexa Skill Lambda for FLI",
-  "devDependencies": {},
+  "devDependencies": {
+    "node-aws-lambda": "0.1.8"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "scripts/package.sh functions dist"
+    "package": "scripts/package.sh functions dist",
+    "deploy": "node scripts/deploy.js dist.zip"
   },
   "repository": {
     "type": "git",
