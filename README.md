@@ -1,4 +1,8 @@
 # Fli: AWS Lambda and Skill for Alexa
+
+##### Requirements
+* node 4.3.2 and npm 2.14.12 
+
 ##### Steps for development
 **AWS Development:**  
 0. Register for an AWS developer account here: https://developer.amazon.com/appsandservices
