@@ -9,11 +9,10 @@
     runtime: 'nodejs4.3'
   };
 
-  const awsLambda = require("node-aws-lambda");
+  const awsLambda = require('node-aws-lambda');
   awsLambda.deploy(artifact, conf, function (err) {
     if (err) {
-      console.log(err);
-      process.exitCode = 1;
+      throw err;
     }
   });
 })();
