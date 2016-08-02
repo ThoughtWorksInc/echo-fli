@@ -1,3 +1,5 @@
+[![Build Status](https://snap-ci.com/ThoughtWorksInc/echo-fli/branch/master/build_image)](https://snap-ci.com/ThoughtWorksInc/echo-fli/branch/master)
+
 # FLI: AWS Lambda and Skill for Alexa
 
 ## Getting Started
