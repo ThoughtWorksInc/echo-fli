@@ -3,7 +3,7 @@
   const conf = {
     region: 'us-east-1',
     handler: 'index.handler',
-    role: 'arn:aws:iam::012522134436:role/lambda_basic_execution',
+    role: process.env.AWS_ROLE_ARN,
     functionName: require('../functions/package.json').name,
     publish: true,
     runtime: 'nodejs4.3'
