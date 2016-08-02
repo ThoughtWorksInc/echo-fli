@@ -1,57 +1,94 @@
-# Fli: AWS Lambda and Skill for Alexa
+# FLI: AWS Lambda and Skill for Alexa
 
-##### Requirements
-* node 4.3.2 and npm 2.14.12 
+## Getting Started
 
-##### Steps for development
-**AWS Development:**  
-0. Register for an AWS developer account here: https://developer.amazon.com/appsandservices
+### Install NVM and Node
+```
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash
+```
+close and reopen terminal
+
+```
+$ nvm install 6.2.1
+$ nvm use
+```
+
+### Install Dependencies
+```
+$ npm install
+```
+
+### Setup an AWS Account
+1. Register for an AWS developer account here: https://developer.amazon.com/appsandservices
  (account needs to be US East to support the free pricing tier)  
-1. Setup AWS credentials in your environment for deploying the lambda. Rather than using the root account user credentials,
+2. Setup AWS credentials in your environment for deploying the lambda. Rather than using the root account user credentials,
 we recommend creating an IAM user with a role which allows it to deploy lambdas.
-..* tl;dr
+  * tl;dr
 ```
-export AWS_ACCESS_KEY_ID=<key>
-export AWS_SECRET_ACCESS_KEY=<secret>
+$ export AWS_ACCESS_KEY_ID=<key>
+$ export AWS_SECRET_ACCESS_KEY=<secret>
 or
-export AWS_PROFILE=<profile>
+$ export AWS_PROFILE=<profile>
 ```
-..* Long Version: http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html
+  * Long Version: http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html
 
-**Lambda:**  
-2. npm install
-3. npm run package
-4. npm run deploy
-5. Go to the AWS console lambda service page: https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions?display=list
-6. Click on 'echo-fli' (this is the name of the function defined in the 'name' key of package.json
-7. Click 'Triggers' tab > '+ Add Trigger' > 'Alexa Skills Kit'. Notes:
-..* Unfortunately, there is currently no documented way to add the Alexa trigger programmatically
-..* This only needs to be done the first time the lambda is created. The trigger will remain in place for subsequently deployed lambdas.
-8. Copy the ARN in the upper right-hand corner  
+## Running Lint
+```
+$ npm run lint
+```
 
-**Alexa Skill:**  
+## Deploying Lambda
+```
+$ npm run package
+$ npm run deploy
+```
+
+## Running Smoke Tests on Deployed Lambda
+```
+$ npm run smoke
+```
+
+## Alexa Skills Setup
+
+### Setup Lambda Alexa Trigger
+
+1. Go to the AWS console lambda service page: https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions?display=list
+2. Click on 'echo-fli' (this is the name of the function defined in the 'name' key of package.json
+3. Click 'Triggers' tab > '+ Add Trigger' > 'Alexa Skills Kit'. Notes:
+4. Copy the ARN in the upper right-hand corner  
+
 Notes:
-* Unfortunately, there is currently no documented way to create the Alexa skill programmatically
-* This only needs to be done once.
-9. Return here: https://developer.amazon.com/appsandservices  
-10. Go to 'Alexa' on the upper menu bar  
-11. Click 'Get Started' with the Alexa Skills Kit  
-12. Click "Add A New Skill'  
-13. Fill out required skill information where not defaulted for invocation and skill name  
-14. Fill out interaction model with information from the speechAssets subdirectory  
-15. Give the Lambda ARN as the Endpoint  
-16. Set Account Linking to 'no', subject to change when linking users in our system  
-17. Click 'next'  
-18. Under 'testing', you should see that the skill is enabled, and you can start using the voice simulator, service simulator, or the Echo itself. If it is not enabled, follow the instructions on the screen to enable it.  
-19. Pat yourself on the back! You're ready to rumble!  
+- These manual steps are necessary because unfortunately, there is currently no documented api for adding an Alexa trigger programmatically.
+- This only needs to be done once. The Alexa trigger will not be removed when the Lambda is redeployed.
 
-Until we get CI set up, you can make edits to the contents of speechAssets and revise the Alexa Skill, and make changes to the Lambda function and reupload the zip file. This will update your lambda/skill and allow you to invoke it on the Echo with your changes.
+### Setup Alexa Skill
+
+1. Go to https://developer.amazon.com/appsandservices  
+2. Go to 'Alexa' on the upper menu bar  
+3. Click 'Get Started' with the Alexa Skills Kit  
+4. Click "Add A New Skill'  
+5. Fill out required skill information where not defaulted for invocation and skill name  
+6. Fill out interaction model with information from the speechAssets subdirectory  
+7. Give the Lambda ARN as the Endpoint (this was copied in the last step of the previous section).
+8. Set Account Linking to 'no', subject to change when linking users in our system  
+9. Click 'next'  
+10. Under 'testing', you should see that the skill is enabled, and you can start using the voice simulator, service simulator, or the Echo itself. If it is not enabled, follow the instructions on the screen to enable it.  
+11. Pat yourself on the back! You're ready to rumble!  
+
+Notes:
+- These manual steps are necessary because unfortunately, there is currently no documented api for adding an Alexa Skill programmatically.
+- This only needs to be done once.
+
+## Keeping Lambda and Alexa Skill in Sync
+
+Since there does not yet appear to be an API for creating or editing Alexa Skills, changes to the interaction model (ie: files under the 'speechAssets' directory) must be manually updated in the AWS Developer Console.
+
+AWS does supply an API for deploying lambdas, so changes to the lambda functionality (ie: js files under the 'functions' directory) can be automated. For local testing, please refer to the previous sections explaining the npm scripts. A Snap CI pipeline has also been provisioned which will deploy the lambda.
 
 Down the road, when linking Echo users to users in our system for the purpose of distinguishing between different teams that use our skill, this link might prove helpful: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/linking-an-alexa-user-with-a-user-in-your-system
 
-**TODO:**
+## TODO (from Samantha Stilson regarding User Input Verification)
+
 Currently Alexa will add events that are not included in our list of event types. This is because custom slot types act as a guide for user input, but do not exclude other terms. See here for a full explanation: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interaction-model-reference#h2_custom_syntax
 
 To fix this, we can verify the user input on our end to make sure it is one of the events in the list. See here for details: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/handling-requests-sent-by-alexa#Handling%20Possible%20Input%20Errors
-
-*last updated on July 18, 2016 by Samantha Stilson, with todo for user input verification*
