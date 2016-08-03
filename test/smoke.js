@@ -2,6 +2,7 @@ const expect = require('chai').expect;
 const AWS = require('aws-sdk');
 
 it('Lambda should be successfully deployed in AWS', function (done) {
+  this.timeout(5000);
   const lambda = new AWS.Lambda({region: 'us-east-1'});
   const params = {
     FunctionName: require('../package.json').name,
