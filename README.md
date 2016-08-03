@@ -11,9 +11,16 @@ $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh |
 close and reopen terminal
 
 ```
-$ nvm install 6.2.1
+$ nvm install 4.4.2
 $ nvm use
 ```
+Note: AWS Lambda runs on node 4.3.2. However, snap-ci/npm install is excessively flaky with this version of node
+(see https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/understanding-how-users-interact-with-skills).
+Therefore, we are using node 4.4.2. This is not even currently an issue since the smoke tests hit the real lambda
+which uses 4.3.2. The only potential problems would be inconsistencies with unit tests (when we eventually have them),
+but I think the flakiness we are observing with 4.3.2 far outweigh the differences we will see between
+4.3.2 and 4.4.2 especially considering the relative simplicity of this lambda and the fact that we are using a later rather
+than an earlier version of node.
 
 ### Install Dependencies
 ```
