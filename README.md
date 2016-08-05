@@ -53,9 +53,12 @@ $ npm test
 
 ## Deploying Lambda
 ```
+$ export AWS_ROLE_ARN=<role_arn>
 $ npm run package
 $ npm run deploy
 ```
+Note: Defining the lambda role is only required the first time you deploy a lambda;
+it is only required on subsequent deploys if you want to use a different role.
 
 ## Running Smoke Tests on Deployed Lambda
 ```
@@ -95,7 +98,7 @@ Notes:
 11. Pat yourself on the back! You're ready to rumble!  
 
 Notes:
-- These manual steps are necessary because unfortunately, there is currently no documented api for adding an Alexa Skill programmatically.
+- These manual steps are necessary because unfortunately, there is currently no documented api for provisioning an Alexa Skill programmatically.
 - This only needs to be done once.
 
 ## Keeping Lambda and Alexa Skill in Sync
