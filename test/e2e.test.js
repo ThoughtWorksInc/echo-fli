@@ -21,6 +21,7 @@ it.only('Lambda event should be persisted to FLI backend database', function (do
   });
 
   jsonClient.get(`/stories/${storyNumber}`, function (err, data) {
+    expect(err).to.eql(null);
     const initialResponse = JSON.parse(data.res.body);
     const initialNumberOfEvents = initialResponse.story.events.length;
     const params = {
