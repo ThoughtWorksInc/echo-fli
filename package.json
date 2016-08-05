@@ -12,7 +12,8 @@
     "eslint-plugin-standard": "^2.0.0",
     "mocha": "^3.0.0",
     "nock": "^8.0.0",
-    "node-aws-lambda": "0.1.8"
+    "node-aws-lambda": "0.1.8",
+    "restify": "^4.1.1"
   },
   "scripts": {
     "postinstall": "cd functions && npm install",
@@ -20,7 +21,8 @@
     "test": "mocha test/unit",
     "package": "scripts/package.sh functions dist",
     "deploy": "node scripts/deploy.js dist.zip",
-    "smoke": "mocha test/smoke"
+    "smoke": "mocha test/smoke",
+    "e2e": "mocha test/e2e"
   },
   "repository": {
     "type": "git",

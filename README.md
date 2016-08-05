@@ -62,6 +62,11 @@ $ npm run deploy
 $ npm run smoke
 ```
 
+## Running End-to-End Tests on Deployed Lambda and FLI server
+```
+$ npm run e2e
+```
+
 ## Alexa Skills Setup
 
 ### Setup Lambda Alexa Trigger
