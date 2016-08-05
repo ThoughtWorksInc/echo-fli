@@ -32,10 +32,12 @@ it.only('Lambda event should be persisted to FLI backend database', function (do
     lambda.invoke(params, function (err, data) {
 
       // Then
+      expect(err).to.eql(null);
       expect(data.StatusCode).to.equal(200);
       expect(data.FunctionError).to.be.undefined;
       expect(JSON.parse(data.Payload).response.outputSpeech.text).to.equal('Event added successfully');
       jsonClient.get(`/stories/${storyNumber}`, function (err, data) {
+        expect(err).to.eql(null);
         responseBody = JSON.parse(data.res.body);
         expect(responseBody.story.events.length).to.equal(initialNumberOfEvents + 1);
         done();
