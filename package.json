@@ -15,6 +15,7 @@
     "node-aws-lambda": "0.1.8"
   },
   "scripts": {
+    "postinstall": "cd functions && npm install",
     "lint": "eslint \"**/*.js\"",
     "test": "mocha test/unit",
     "package": "scripts/package.sh functions dist",

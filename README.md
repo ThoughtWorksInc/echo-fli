@@ -25,8 +25,6 @@ than an earlier version of node.
 ### Install Dependencies
 ```
 $ npm install
-$ cd functions
-$ npm install
 ```
 
 ### Setup an AWS Account
