@@ -3,6 +3,7 @@
 const expect = require('chai').expect;
 const nock = require('nock');
 const intentEventFactory = require('./intent-event-factory');
+const conf = require('../functions/config');
 const sut = require('../functions/index');
 
 const assert = require('chai').assert;
@@ -17,7 +18,7 @@ describe('Lambda', function () {
   let fliBackend;
 
   beforeEach(function () {
-    fliBackend = nock('http://fli-change.herokuapp.com')
+    fliBackend = nock(`http://${conf.hostname}`)
       .post('/events')
       .reply(200);
   });

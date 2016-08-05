@@ -1,5 +1,6 @@
 const APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
 const AlexaSkill = require('./AlexaSkill');
+const conf = require('./config');
 
 const Fli = function () {
   AlexaSkill.call(this, APP_ID);
@@ -31,7 +32,7 @@ Fli.prototype.intentHandlers = {
 };
 
 function parseIntent(intent, callback) {
-  const validEventTypes = require('./custom-slot-types').LIST_OF_EVENTS;
+  const validEventTypes = conf.customSlotTypes.LIST_OF_EVENTS;
   const eventType = intent.slots.Event.value;
   const storyNumber = intent.slots.Number.value;
 
@@ -55,7 +56,7 @@ function addIntent(data, response) {
   });
 
   const options = {
-    hostname: 'fli-change.herokuapp.com',
+    hostname: conf.hostname,
     port: 80,
     path: '/events',
     method: 'POST',
