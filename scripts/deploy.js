@@ -4,7 +4,7 @@
     region: 'us-east-1',
     handler: 'index.handler',
     role: process.env.AWS_ROLE_ARN,
-    functionName: require('../functions/package.json').name,
+    functionName: require('../package.json').name,
     publish: true,
     runtime: 'nodejs4.3'
   };

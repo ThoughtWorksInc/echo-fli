@@ -2,6 +2,9 @@
   "name": "echo-fli",
   "version": "0.1.0",
   "description": "Alexa Skill Lambda for FLI",
+  "dependencies": {
+    "moment": "2.13.0"
+  },
   "devDependencies": {
     "aws-sdk": "^2.4.11",
     "chai": "^3.5.0",
@@ -16,7 +19,6 @@
     "restify": "^4.1.1"
   },
   "scripts": {
-    "postinstall": "cd functions && npm install",
     "lint": "eslint \"**/*.js\"",
     "test": "mocha test/unit.test",
     "package": "scripts/package.sh functions dist",
