@@ -16,13 +16,11 @@ Fli.prototype.eventHandlers.onLaunch = (launchRequest, session, response) => {
 
 Fli.prototype.intentHandlers = {
   'FliIntent': (intent, session, response) => {
-    const eventType = intent.slots.Event.value;
-
-    validateEvent(eventType, function (err) {
+    parseIntent(intent, function (err, data) {
       if (err) {
         response.tell(err);
       } else {
-        addEvent(eventType, intent, response);
+        addIntent(data, response);
       }
     });
   },
@@ -32,23 +30,28 @@ Fli.prototype.intentHandlers = {
   }
 };
 
-function validateEvent(eventType, callback) {
+function parseIntent(intent, callback) {
   const validEventTypes = require('./custom-slot-types').LIST_OF_EVENTS;
+  const eventType = intent.slots.Event.value;
+  const storyNumber = intent.slots.Number.value;
+
   if (validEventTypes.indexOf(eventType) < 0) {
     callback(`'${eventType}' is an invalid event type. Valid event types are: ${validEventTypes}`);
+  } else if (!Number.isInteger((parseFloat(storyNumber)))) {
+    callback('Sorry, the story number must be an integer.');
   } else {
-    callback();
+    callback(null, {eventType: eventType, storyNumber: storyNumber});
   }
 }
 
-function addEvent(eventType, intent, response) {
+function addIntent(data, response) {
   const http = require('http');
   const moment = require('moment');
 
   const postData = JSON.stringify({
-    eventType: eventType.replace(/ /g, '_'),
+    eventType: data.eventType.replace(/ /g, '_'),
     occurredAt: moment.utc().format('YYYY-MM-DD HH:mm:ss'),
-    story: intent.slots.Number.value
+    story: data.storyNumber
   });
 
   const options = {

@@ -7,13 +7,13 @@ const sut = require('../functions/index');
 
 const assert = require('chai').assert;
 function fail(done) {
-  return function(err) {
+  return function (err) {
     assert.fail(null, null, `Lambda failed: ${err}`);
     done();
   };
 }
 
-describe('Lambda handler', function () {
+describe('Lambda', function () {
   let fliBackend;
 
   beforeEach(function () {
@@ -26,7 +26,7 @@ describe('Lambda handler', function () {
     nock.cleanAll();
   });
 
-  it('should successfully handle launch request', function (done) {
+  it('should respond to launch request', function (done) {
     const event = {
       session: {},
       version: '1.0',
@@ -43,7 +43,7 @@ describe('Lambda handler', function () {
     });
   });
 
-  it('should successfully handle valid intent request', function (done) {
+  it('should persist and respond to intent request', function (done) {
     const event = intentEventFactory.create('start');
 
     sut.handler(event, {
@@ -56,15 +56,31 @@ describe('Lambda handler', function () {
     });
   });
 
-  it('should successfully handle invalid intent request', function (done) {
-    const event = intentEventFactory.create('invalid-event');
+  describe('should respond (without persisting) to invalid intent request', function () {
 
-    sut.handler(event, {
-      succeed: function (response) {
-        expect(response.response.outputSpeech.text).to.contain('is an invalid event type');
-        done();
-      },
-      fail: fail(done)
+    it('when event type is invalid', function (done) {
+      const event = intentEventFactory.create('invalid-event');
+
+      sut.handler(event, {
+        succeed: function (response) {
+          expect(response.response.outputSpeech.text).to.contain('is an invalid event type');
+          done();
+        },
+        fail: fail(done)
+      });
     });
+
+    it('when story number is invalid', function (done) {
+      const event = intentEventFactory.create('start', '?');
+
+      sut.handler(event, {
+        succeed: function (response) {
+          expect(response.response.outputSpeech.text).to.contain('story number must be an integer');
+          done();
+        },
+        fail: fail(done)
+      });
+    });
+
   });
 });

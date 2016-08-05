@@ -1,4 +1,6 @@
-exports.create = function (eventValue) {
+exports.create = function (eventValue, storyNumber) {
+  storyNumber = storyNumber || '1';
+
   return {
     session: {},
     version: '1.0',
@@ -9,7 +11,7 @@ exports.create = function (eventValue) {
         slots: {
           Number: {
             name: 'Number',
-            value: '1'
+            value: storyNumber
           },
           Event: {
             name: 'Event',
