@@ -46,6 +46,11 @@ $ export AWS_PROFILE=<profile>
 $ npm run lint
 ```
 
+## Running Unit Tests
+```
+$ npm test
+```
+
 ## Deploying Lambda
 ```
 $ npm run package
@@ -95,9 +100,3 @@ Since there does not yet appear to be an API for creating or editing Alexa Skill
 AWS does supply an API for deploying lambdas, so changes to the lambda functionality (ie: js files under the 'functions' directory) can be automated. For local testing, please refer to the previous sections explaining the npm scripts. A Snap CI pipeline has also been provisioned which will deploy the lambda.
 
 Down the road, when linking Echo users to users in our system for the purpose of distinguishing between different teams that use our skill, this link might prove helpful: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/linking-an-alexa-user-with-a-user-in-your-system
-
-## TODO (from Samantha Stilson regarding User Input Verification)
-
-Currently Alexa will add events that are not included in our list of event types. This is because custom slot types act as a guide for user input, but do not exclude other terms. See here for a full explanation: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interaction-model-reference#h2_custom_syntax
-
-To fix this, we can verify the user input on our end to make sure it is one of the events in the list. See here for details: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/handling-requests-sent-by-alexa#Handling%20Possible%20Input%20Errors
