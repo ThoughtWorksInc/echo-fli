@@ -72,7 +72,7 @@ $ npm run e2e
 ### Setup Lambda Alexa Trigger
 
 1. Go to the AWS console lambda service page: https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions?display=list
-2. Click on 'echo-fli' (this is the name of the function defined in the 'name' key of package.json
+2. Click on 'echoFli' (this is the name of the function defined in the 'name' key of package.json
 3. Click 'Triggers' tab > '+ Add Trigger' > 'Alexa Skills Kit'. Notes:
 4. Copy the ARN in the upper right-hand corner  
 

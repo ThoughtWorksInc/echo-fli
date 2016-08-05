@@ -1,5 +1,5 @@
 {
-  "name": "echo-fli",
+  "name": "echoFli",
   "version": "0.1.0",
   "description": "Alexa Skill Lambda for FLI",
   "dependencies": {
