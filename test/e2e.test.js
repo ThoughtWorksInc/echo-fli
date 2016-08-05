@@ -21,8 +21,8 @@ it.only('Lambda event should be persisted to FLI backend database', function (do
   });
 
   jsonClient.get(`/stories/${storyNumber}`, function (err, data) {
-    let responseBody = JSON.parse(data.res.body);
-    const initialNumberOfEvents = responseBody.story.events.length;
+    const initialResponse = JSON.parse(data.res.body);
+    const initialNumberOfEvents = initialResponse.story.events.length;
     const params = {
       FunctionName: require('../package.json').name,
       Payload: JSON.stringify(intentEventFactory.create('kickoff', storyNumber))
@@ -38,8 +38,8 @@ it.only('Lambda event should be persisted to FLI backend database', function (do
       expect(JSON.parse(data.Payload).response.outputSpeech.text).to.equal('Event added successfully');
       jsonClient.get(`/stories/${storyNumber}`, function (err, data) {
         expect(err).to.eql(null);
-        responseBody = JSON.parse(data.res.body);
-        expect(responseBody.story.events.length).to.equal(initialNumberOfEvents + 1);
+        const finalResponse = JSON.parse(data.res.body);
+        expect(finalResponse.story.events.length).to.equal(initialNumberOfEvents + 1);
         done();
       });
     });
