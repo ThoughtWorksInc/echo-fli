@@ -18,11 +18,11 @@
   "scripts": {
     "postinstall": "cd functions && npm install",
     "lint": "eslint \"**/*.js\"",
-    "test": "mocha test/unit",
+    "test": "mocha test/unit.test",
     "package": "scripts/package.sh functions dist",
     "deploy": "node scripts/deploy.js dist.zip",
-    "smoke": "mocha test/smoke",
-    "e2e": "mocha test/e2e"
+    "smoke": "mocha test/smoke.test",
+    "e2e": "mocha test/e2e.test"
   },
   "repository": {
     "type": "git",
